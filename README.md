@@ -20,11 +20,19 @@ This repository provides tools and scripts for automated segmentation and quanti
    - Estimate segmentation uncertainty from prediction probabilities using `uncertainty_estimation.py`.
    - Select the most uncertain or informative samples to include in the next iteration of training/data labeling (active learning loop).
 
+## Workflow Diagrams
+
+### Active Learning Pipeline
+![Active Learning Pipeline](path_or_url_to_active_learning_image)
+
+### Diameter Calculation Pipeline
+![Diameter Calculation Pipeline](path_or_url_to_diameter_calculation_image)
+
 ## Main Files
 
 - `diameter_cal_prototype.ipynb`: Core notebook for vessel skeletonization and diameter calculation.
 - `diameter_comparison_prototype.ipynb`: Compares predicted vs. ground truth diameters, computes evaluation metrics, and generates plots.
-- `kinking_v2.ipynb`: Calculates vessel angulation metrics 
+- `kinking_v2.ipynb`: Calculates vessel angulation metrics.
 - `dice.py`: Computes Dice scores per class and summarizes segmentation quality.
 - `post_processing.py`: Cleans predicted segmentation masks using morphological operations.
 - `nnunet.scrpt`: SLURM/bash script for nnUNet training, inference, and environment setup.
