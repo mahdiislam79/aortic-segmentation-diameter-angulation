@@ -31,10 +31,10 @@ This repository provides tools and scripts for automated segmentation and quanti
 ## Results
 
 ### Active Learning Pipeline
-![Active Learning Dice](Images/activelearning_dice.png)
+![Active Learning Dice](Images/activelearning_dice.jpg)
 
 ### Diameter Calculation Pipeline
-![Diameter Calculation Iliac](Images/028_diameter_plot_iliac.png)
+![Diameter Calculation Iliac](Images/028_diameter_plot_iliac.jpg)
 
 ## Main Files
 
