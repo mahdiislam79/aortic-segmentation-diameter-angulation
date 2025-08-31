@@ -32,15 +32,9 @@ This repository provides tools and scripts for automated segmentation and quanti
 
 ### Active Learning Pipeline
 ![Active Learning Dice](activelearning_dice.png)
-![Active Learning MAPE](activelearning_mape.png)
 
 ### Diameter Calculation Pipeline
-![Diameter Calculation Iliac](diameter_plot_iliac.png)
-![Diameter Calculation GT vs Pred](042_diameters_l_illiac_diameter_comparison_switched_axes.png)
-
-
-### Vessel Angulation Analysis
-![Vessel Angulation Analysis](3d_comparison.png)
+![Diameter Calculation Iliac](028_diameter_plot_iliac.png)
 
 ## Main Files
 
