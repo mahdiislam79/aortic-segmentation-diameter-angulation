@@ -1,0 +1,77 @@
+#!/bin/bash
+#
+#  usage: sbatch ./gpu_test.scrpt
+#
+#SBATCH -J A40
+#SBATCH -N 1                           #use -N only if you use both GPUs on the nodes, otherwise leave this line out
+#SBATCH --partition zen2_0256_a40x2
+#SBATCH --qos zen2_0256_a40x2
+#SBATCH --gres=gpu:2
+#SBATCH -t 2-00:00:00
+
+module load miniconda3
+eval "$(conda shell.bash hook)" 
+conda activate nnunet_dev
+
+
+# Set nnU-Net paths
+export nnUNet_raw=/gpfs/data/fs71894/mahdi_i/ActiveLearning/dataset/nnunet_data/nnUNet_raw
+export nnUNet_preprocessed=/gpfs/data/fs71894/mahdi_i/ActiveLearning/dataset/nnunet_data/nnUNet_preprocessed
+export nnUNet_results=/gpfs/data/fs71894/mahdi_i/ActiveLearning/dataset/nnunet_data/nnUNet_results
+
+
+# nnUNetv2_plan_and_preprocess -d 004 --verify_dataset_integrity
+
+# nnUNetv2_plan_and_preprocess -d 012 -pl nnUNetPlannerResEncM --verify_dataset_integrity
+
+# # TRAIN using fold 0 only for now
+# nnUNetv2_train 002 3d_fullres 0 \
+#   -tr nnUNetTrainer \
+#   -pretrained_weights /gpfs/data/fs71894/mahdi_i/nnunet_accessroute/nnUNet_results/Dataset001_mr/nnUNetTrainer__nnUNetPlans__3d_fullres/fold_3/checkpoint_best.pth \
+#   -learning_rate 1e-4 \
+#   -disable_checkpointing \
+#   -epochs 100
+
+# nnUNetv2_train 002 3d_fullres 0 \
+#   -tr nnUNetTrainer_customLR \
+#   -pretrained_weights /gpfs/data/fs71894/mahdi_i/nnunet_accessroute/nnUNet_results/Dataset001_mr/nnUNetTrainer__nnUNetPlans__3d_fullres/fold_3/checkpoint_best.pth
+
+
+# nnUNetv2_train 004 3d_fullres 0 -tr nnUNetTrainer \
+# -pretrained_weights /gpfs/data/fs71894/mahdi_i/nnunet_accessroute/nnUNet_results/Dataset001_mr/nnUNetTrainer__nnUNetPlans__3d_fullres/fold_3/checkpoint_best.pth
+# nnUNetv2_train 004 3d_fullres 1 -tr nnUNetTrainer \
+# -pretrained_weights /gpfs/data/fs71894/mahdi_i/nnunet_accessroute/nnUNet_results/Dataset001_mr/nnUNetTrainer__nnUNetPlans__3d_fullres/fold_3/checkpoint_best.pth
+# nnUNetv2_train 004 3d_fullres 2 -tr nnUNetTrainer \
+# -pretrained_weights /gpfs/data/fs71894/mahdi_i/nnunet_accessroute/nnUNet_results/Dataset001_mr/nnUNetTrainer__nnUNetPlans__3d_fullres/fold_3/checkpoint_best.pth
+# nnUNetv2_train 004 3d_fullres 3 -tr nnUNetTrainer \
+# -pretrained_weights /gpfs/data/fs71894/mahdi_i/nnunet_accessroute/nnUNet_results/Dataset001_mr/nnUNetTrainer__nnUNetPlans__3d_fullres/fold_3/checkpoint_best.pth
+# nnUNetv2_train 004 3d_fullres 4 -tr nnUNetTrainer \
+# -pretrained_weights /gpfs/data/fs71894/mahdi_i/nnunet_accessroute/nnUNet_results/Dataset001_mr/nnUNetTrainer__nnUNetPlans__3d_fullres/fold_3/checkpoint_best.pth
+
+# Train nnUNetResEncUNetMPlans
+# nnUNetv2_train 012 3d_fullres 0 -p nnUNetResEncUNetMPlans 
+# nnUNetv2_train 012 3d_fullres 1 -p nnUNetResEncUNetMPlans 
+# nnUNetv2_train 012 3d_fullres 2 -p nnUNetResEncUNetMPlans 
+# nnUNetv2_train 012 3d_fullres 3 -p nnUNetResEncUNetMPlans 
+# nnUNetv2_train 012 3d_fullres 4 -p nnUNetResEncUNetMPlans 
+ 
+# nnUNetv2_predict \
+#   -i /gpfs/data/fs71894/mahdi_i/ActiveLearning/dataset/nnunet_data/inference/iter1_mc/imagesTr_variants\
+#   -o /gpfs/data/fs71894/mahdi_i/ActiveLearning/dataset/nnunet_data/inference/iter1_mc/uncertainty_mc\
+#   -d 010 -c 3d_fullres -p nnUNetResEncUNetMPlans -f 0 1 2 3 4 \
+#   --save_probabilities \
+#   -i /gpfs/data/fs71894/mahdi_i/ActiveLearning/dataset/nnunet_data/inference/imagesTr\
+#   -o /gpfs/data/fs71894/mahdi_i/ActiveLearning/dataset/nnunet_data/inference/iter3_400_epochs/test_pred \
+
+
+# nnUNetv2_predict \
+#   -i /gpfs/data/fs71894/mahdi_i/ActiveLearning/dataset/nnunet_data/inference/Dataset_012/imagesTr_remaining\
+#   -o /gpfs/data/fs71894/mahdi_i/ActiveLearning/dataset/nnunet_data/inference/Dataset_012/pred_proba\
+#   -d 012 -c 3d_fullres -p nnUNetResEncUNetMPlans -f 0 1 2 3 4 \
+#   --save_probabilities \
+
+nnUNetv2_predict \
+    -i /gpfs/data/fs71894/mahdi_i/QISS_CMR_resampled/pre\
+    -o /gpfs/data/fs71894/mahdi_i/QISS_CMR_resampled/labels\
+    -d 08 -c 3d_fullres -p nnUNetResEncUNetMPlans -f 0 1 2 3 4 \
+    # --save_probabilities \
