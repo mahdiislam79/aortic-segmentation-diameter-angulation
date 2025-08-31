@@ -40,11 +40,6 @@ This repository provides tools and scripts for automated segmentation and quanti
 
 - Python (>=3.7), Jupyter Notebook
 - numpy, pandas, nibabel, scikit-image, scipy, matplotlib, torch, tqdm, monai, networkx, skan
-
-## Intended Audience
-
-Researchers and clinicians working on vascular imaging, medical image analysis, or active learning for deep learning segmentation.
-
 ---
 
 For details on running each stage, see the code and comments in the corresponding scripts/notebooks. Adjust input/output paths as needed for your data and environment.
