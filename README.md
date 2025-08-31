@@ -23,18 +23,18 @@ This repository provides tools and scripts for automated segmentation and quanti
 ## Workflow Diagrams
 
 ### Active Learning Pipeline
-![Active Learning Pipeline](images/ActiveLearning.drawio.png)
+![Active Learning Pipeline](Images/ActiveLearning.drawio.png)
 
 ### Diameter Calculation Pipeline
-![Diameter Calculation Pipeline](images/Diameter_cal_flowchart.png)
+![Diameter Calculation Pipeline](Images/Diameter_cal_flowchart.png)
 
 ## Results
 
 ### Active Learning Pipeline
-![Active Learning Dice](images/activelearning_dice.png)
+![Active Learning Dice](Images/activelearning_dice.png)
 
 ### Diameter Calculation Pipeline
-![Diameter Calculation Iliac](images/028_diameter_plot_iliac.png)
+![Diameter Calculation Iliac](Images/028_diameter_plot_iliac.png)
 
 ## Main Files
 
